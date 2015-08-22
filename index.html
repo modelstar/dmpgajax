@@ -15,26 +15,22 @@
 <body>
 
 
-<div class="app">
-<h1>PG DM Ajax 1</h1>
-<input id="clickMe" type="button" value="clickme" onclick="loadlocchars();" />
-<div id="deviceready" class="blink">
-<p class="event listening">Connecting to Device</p>
-<p class="event received">Device is Ready</p>
-</div>
-</div>
 
 
 
 
-
+<script language="javascript" type="text/javascript" src="http://www.dragonsmyst.com/jquery.js"></script>
 
 <script type="text/javascript" src="cordova.js"></script>
 
 <script type="text/javascript">
-app.initialize();
+function hey()
+{
+alert('heit');
+}
 
 
+  
 var locid=5;
 function loadlocchars()
 {
@@ -113,7 +109,20 @@ var app = {
     }
 };
 
+app.initialize();
+
 
 </script>
+
+<div class="app">
+<h1>PG DM Ajax 1</h1>
+<input id="clickMe" type="button" value="clickme" onClick="loadlocchars();" />
+<div id="deviceready" class="blink">
+<p class="event listening">Connecting to Device</p>
+<p class="event received">Device is Ready</p>
+</div>
+</div>
+
+
 </body>
 </html>
