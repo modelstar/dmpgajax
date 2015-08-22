@@ -10,7 +10,56 @@
  
 <link rel="stylesheet" type="text/css" href="index.css" />
 
-<title>PG DM Ajax 1</title>
+<title>PG DM Ajax 2</title>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+function hey()
+{
+alert('heit');
+}
+</script>
+
+
+
+<script charset="utf&minus;8" type="text/javascript">
+function connect(e)
+{
+
+var term= {button:e};
+
+$.ajax({
+url:'http://www.dragonsmyst.com/reply.php',
+type:'POST',
+data:term,
+dataType:'json',
+error:function(jqXHR,text_status,strError)
+{alert('no connection');},
+timeout:60000,
+success:function(data)
+{
+$("#result").html("");
+for(var i in data)
+{
+$("#result").append("<li>"+data[i]+"</li>");
+}
+
+}
+
+});
+
+}
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -19,109 +68,14 @@
 
 
 
-<script language="javascript" type="text/javascript" src="http://www.dragonsmyst.com/jquery.js"></script>
-
-<script type="text/javascript" src="cordova.js"></script>
-
-<script type="text/javascript">
-function hey()
-{
-alert('heit');
-}
 
 
-  
-var locid=5;
-function loadlocchars()
-{
-//var locid=5;
-var ctr=0;//  use an external js counter
-charr=new Array();//  no var statement before
+<center><b>Bikes or Cars</b></center>
+<center><input onclick="connect(this.value)" type="button" value="cars" /></center>
+<center><input onclick="connect(this.value)" type="button" value="bikes" /></center>
+<center><b>Results</b></center>
 
-$.ajax({
-type: "POST",
-url: "http://www.dragonsmyst.com/loadlocchars.php",
-data: 'locid='+locid,
-dataType: "json",
-success: function(data)
-{
-    $.each(data, function(key,i)
-	{
-	var y=i.y;
-	var x=i.x;
-	var uniquename=i.uniquename;
-	var file=i.file;
-			
-	gm[y][x] = file;
-		
-	aschar(ctr,i.charid,i.typeid,i.locid,i.y,i.x,i.name,i.uniquename,i.file);
-	ctr=ctr+1;
-    });
-		
-	gbloc();		
-}
-});
-
-}
-
-function aschar(ctr,charid,typeid,locid,y,x,name,uniquename,file)
-{
-charr[ctr]=new Array();
-var j=ctr;//   use an external s counter
-charr[ctr][0]=y;
-charr[ctr][1]=x;
-charr[ctr][2]=uniquename;
-alert(j+','+charr[j][0]+','+charr[j][2]);
-}
-
-
-
-
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();
-
-
-</script>
-
-<div class="app">
-<h1>PG DM Ajax 1</h1>
-<input id="clickMe" type="button" value="clickme" onClick="loadlocchars();" />
-<div id="deviceready" class="blink">
-<p class="event listening">Connecting to Device</p>
-<p class="event received">Device is Ready</p>
-</div>
-</div>
+<ul id="result"></ul>
 
 
 </body>
